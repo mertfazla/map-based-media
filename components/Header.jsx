@@ -15,7 +15,7 @@ function Homepage() {
 	return (
 		<div>
 			{status === "loading" &&
-				<nav className="w-full h-12 bg-teal-100 justify-center items-center">
+				<nav className="w-full h-12 bg-teal-500 justify-center items-center">
 					<ul className="flex flext-column justify-between items-center li-none mx-2 w-full h-full">
 						<li className="flex text-xl ml-12">MEDIA</li>
 						<li className="flex mx-2 bg-slate-300 items-center gap-2">
@@ -24,8 +24,8 @@ function Homepage() {
 					</ul>
 				</nav>}
 			{status === "authenticated" && <div>
-				<nav className="w-full h-12 bg-teal-100 justify-center items-center">
-					<ul className="flex flext-column justify-between items-center li-none mx-2 w-full h-full">
+				<nav className="w-full h-12 bg-teal-500 justify-center items-center">
+					<ul className="flex flext-column justify-between items-center li-none w-full h-full">
 						<li className="flex text-xl ml-12">MEDIA</li>
 						<li className="flex mx-2 bg-slate-300 items-center gap-2">
 							<a className="cursor-pointer" onClick={() => signIn()}>signout</a>

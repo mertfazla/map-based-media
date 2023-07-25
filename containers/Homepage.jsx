@@ -3,9 +3,11 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Textbox from "@/components/Textbox";
 import Button from "@/components/Button";
+import Map from "@/components/Map";
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import PostSection from "@/components/PostSection";
+import MapLocationAdd from "@/components/MapLocationAdd";
 
 function Homepage() {
 const [textboxContent, setTextboxContent] = useState("");
@@ -77,9 +79,11 @@ useEffect(() => {
 
 return (
 	<div>
-		<div>This is homepage</div>
+		<Map />
+		<MapLocationAdd />
 		<Textbox onChange={setTextboxContent} />
 		<Button text={"Submit"} onClick={handleAdd} />
+		
 		<PostSection posts={posts} loading={isLoading} handleDelete={handleDelete} />
 	</div>
 
