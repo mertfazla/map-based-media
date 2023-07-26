@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "next-auth/react";
 import Image from 'next/image';
+import Link from "next/link";
 
 function Homepage() {
 	const { data, status } = useSession({
@@ -11,6 +12,8 @@ function Homepage() {
 			redirect("/api/auth/signin")
 		}
 	});
+	console.log(data)
+
 
 	return (
 		<div>
@@ -27,6 +30,7 @@ function Homepage() {
 				<nav className="w-full h-12 bg-teal-500 justify-center items-center">
 					<ul className="flex flext-column justify-between items-center li-none w-full h-full">
 						<li className="flex text-xl ml-12">MEDIA</li>
+						<li className="flex text-xl ml-12"> <Link href={`/user/j/posts`}></Link> </li>
 						<li className="flex mx-2 bg-slate-300 items-center gap-2">
 							<a className="cursor-pointer" onClick={() => signIn()}>signout</a>
 							<Image src={data.user.image} alt="Picture of the author" width={32} height={32} />

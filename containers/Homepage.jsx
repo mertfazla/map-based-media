@@ -27,7 +27,6 @@ const handleDelete = async (postID) => {
 	const data = await res.data;
 	setPosts(prevPosts => prevPosts.filter(post => post.id !== postID));
 	console.log(data);
-
 }
 
 //==========When user click submit buton for append post================
@@ -80,7 +79,6 @@ useEffect(() => {
 return (
 	<div>
 		<Map />
-		<MapLocationAdd />
 		<Textbox onChange={setTextboxContent} />
 		<Button text={"Submit"} onClick={handleAdd} />
 		

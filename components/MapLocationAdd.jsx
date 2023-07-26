@@ -2,15 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
-function MapLocationAdd() {
-	const [longitude, setLongitude] = useState("");
-	const [latitude, setLatitude] = useState("");
+function MapLocationAdd({longitude, latitude}) {
+
 	const [imageURL, setImageURL] = useState("");
-
 	useEffect(() => {
-		console.log(imageURL);
-	}, [imageURL])
-
+		console.log(longitude, latitude, "=000");
+	}, [longitude, latitude])
 
 	const handleSubmit = async (e) => {
 		try {
@@ -24,6 +21,7 @@ function MapLocationAdd() {
 			const returnedValue = await response.data;
 			console.log(returnedValue)
 
+
 		}catch(error){
 			console.error(error);
 		}
@@ -32,9 +30,9 @@ function MapLocationAdd() {
 		<div>
 			<h1>Map Location Add</h1>
 			<form className="flex flex-col justify-center items-center">
-				<input onChange={(e) => setLongitude(e.target.value)} type="float" placeholder="longitude" name='longitude' id='longitude' />
-				<input onChange={(e) => setLatitude(e.target.value)} type="float" placeholder="latitude" name='latitude' id='latitude' />
-				<input onChange={(e) => setImageURL(e.target.value)} type="text" placeholder="imageURL" name='imageURL' id='imageURL' />
+				<input type="float" placeholder="longitude" name='longitude' id='longitude' defaultValue={longitude} readOnly />
+				<input type="float" placeholder="latitude" name='latitude' id='latitude' defaultValue={latitude} readOnly/>
+				<input type="text" placeholder="imageURL" name='imageURL' id='imageURL' onChange={(e)=>setImageURL(e.target.value)} />
 				<button type="submit" onClick={handleSubmit}>Submit</button>
 			</form>
 		</div>

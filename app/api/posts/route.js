@@ -4,13 +4,6 @@ import { cookies } from 'next/headers'
 const prisma = new PrismaClient();
 
 export async function POST(req) {
-	const config = {
-		api: {
-			bodyParser: {
-				sizeLimit: '1mb',
-			},
-		},
-	}
 	try {
 		const cookieStore = cookies();
 		const token = cookieStore.get('next-auth.session-token').value;

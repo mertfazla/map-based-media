@@ -4,13 +4,7 @@ import { cookies } from 'next/headers'
 const prisma = new PrismaClient();
 
 export async function POST(req) {
-	const config = {
-		api: {
-			bodyParser: {
-				sizeLimit: '1mb',
-			},
-		},
-	}
+	
 	try {
 		//=============Find the user from the session token================
 		const cookieStore = cookies();
