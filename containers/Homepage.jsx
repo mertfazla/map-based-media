@@ -81,7 +81,6 @@ return (
 		<Map />
 		<Textbox onChange={setTextboxContent} />
 		<Button text={"Submit"} onClick={handleAdd} />
-		
 		<PostSection posts={posts} loading={isLoading} handleDelete={handleDelete} />
 	</div>
 

@@ -12,7 +12,6 @@ function Homepage() {
 			redirect("/api/auth/signin")
 		}
 	});
-	console.log(data)
 
 
 	return (
@@ -29,10 +28,10 @@ function Homepage() {
 			{status === "authenticated" && <div>
 				<nav className="w-full h-12 bg-teal-500 justify-center items-center">
 					<ul className="flex flext-column justify-between items-center li-none w-full h-full">
-						<li className="flex text-xl ml-12">MEDIA</li>
-						<li className="flex text-xl ml-12"> <Link href={`/user/j/posts`}></Link> </li>
+						<li className="flex text-xl ml-12"> <Link href={`/`}>MEDIA </Link> </li>
+						<li className="flex text-xl ml-12"> <Link href={`/user/posts`}>My Posts</Link> </li>
 						<li className="flex mx-2 bg-slate-300 items-center gap-2">
-							<a className="cursor-pointer" onClick={() => signIn()}>signout</a>
+							<a className="cursor-pointer" onClick={() => signOut()}>signout</a>
 							<Image src={data.user.image} alt="Picture of the author" width={32} height={32} />
 						</li>
 					</ul>

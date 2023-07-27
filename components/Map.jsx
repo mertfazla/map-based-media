@@ -4,6 +4,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
 import { useEffect, useState, useRef } from "react"
 import { } from "@next/font/google";
 import MapLocationAdd from "./MapLocationAdd";
+import axios from "axios";
 
 function Map() {
 	const [markers, setMarkers] = useState([])
@@ -12,20 +13,33 @@ function Map() {
 	const [latitude, setLatitude] = useState("");
 	const centerRef = useRef({ lat: 43.6532, lng: -79.3832, })
 
-
 	const handleFetch = async () => {
 		const res = await fetch("/api/marker")
 		const data = await res.json()
-		console.log("DATA->", data)
 		setMarkers(data)
 	}
 
-	const handleGetCoordinate= (latLng) => {
-
+	const handleGetCoordinate = (latLng) => {
 		setLongitude(latLng.lng().toFixed(3))
 		setLatitude(latLng.lat().toFixed(3))
 	}
 
+	const handleSubmit = async (e, imageURL) => {
+		try {
+			e.preventDefault();
+			const data = { longitude: longitude, latitude: latitude, imageURL: imageURL };
+			const response = await axios.post('/api/marker', JSON.stringify(data), {
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			const returnedValue = await response.data;
+			handleFetch();
+
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	useEffect(() => {
 		console.log("Locations are fetching");
@@ -59,8 +73,6 @@ function Map() {
 						onClick={(event) => {
 							setUserMark({ longitude: event.latLng.lng(), latitude: event.latLng.lat(), })
 							handleGetCoordinate(event.latLng);
-							console.log("Latitude:", event.latLng.lat());
-							console.log("Longitude:", event.latLng.lng());
 						}}
 					>
 
@@ -90,13 +102,14 @@ function Map() {
 									url: marker.imageURL,
 									scaledSize: { width: 50, height: 50 },
 								}}
+								
 							/>
 						))}
 					</GoogleMap>
 				</span>
 			</div>
 			<div>
-				<MapLocationAdd longitude={longitude} latitude={latitude} />
+				<MapLocationAdd longitude={longitude} latitude={latitude} handleSubmit={handleSubmit} />
 			</div>
 		</>
 	)

@@ -11,7 +11,7 @@ export default function RootLayout({ children}) {
 	return (
 		<ProviderContext>
 			<html lang="en">
-				<body className='text-md bg-white'>
+				<body className='text-md'>
 					<Header />
 					
 					{children}
