@@ -5,8 +5,11 @@ import { useEffect, useState, useRef } from "react"
 import { } from "@next/font/google";
 import MapLocationAdd from "./MapLocationAdd";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 
 function Map() {
+	const router = useRouter();
 	const [markers, setMarkers] = useState([])
 	const [userMark, setUserMark] = useState({ longitude: null, latitude: null, })
 	const [longitude, setLongitude] = useState("");
@@ -91,19 +94,23 @@ function Map() {
 									url: "/location_on.svg",
 									scaledSize: { width: 35, height: 35 },
 								}}
+								onClick={() => {
+									router.push(`/posts/${markers.id}`)
+								}}
 							/>
 						)}
 
 						{markers.map(marker => (
-							<Marker
-								key={marker.id}
-								position={{ lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude) }}
-								icon={{
-									url: marker.imageURL,
-									scaledSize: { width: 50, height: 50 },
-								}}
-								
-							/>
+								<Marker key={marker.id}
+									position={{ lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude) }}
+									icon={{
+										url: marker.imageURL,
+										scaledSize: { width: 50, height: 50 },
+									}}
+									onClick={() => {
+										router.push(`/posts/${marker.id}`)
+									}}
+								/>
 						))}
 					</GoogleMap>
 				</span>
