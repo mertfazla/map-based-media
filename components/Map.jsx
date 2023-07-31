@@ -2,7 +2,6 @@
 require('dotenv').config()
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
 import { useEffect, useState, useRef } from "react"
-import { } from "@next/font/google";
 import MapLocationAdd from "./MapLocationAdd";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -15,8 +14,10 @@ function Map() {
 	const [longitude, setLongitude] = useState("");
 	const [latitude, setLatitude] = useState("");
 	const centerRef = useRef({ lat: 43.6532, lng: -79.3832, })
+	const [posts, setPosts] = useState([]);
 
 	const handleFetch = async () => {
+		console.log("Locations are fetching...");
 		const res = await fetch("/api/marker")
 		const data = await res.json()
 		setMarkers(data)
@@ -27,17 +28,39 @@ function Map() {
 		setLatitude(latLng.lat().toFixed(3))
 	}
 
-	const handleSubmit = async (e, imageURL) => {
+	const handleSubmit = async (e, imageURL, textboxContent) => {
 		try {
 			e.preventDefault();
-			const data = { longitude: longitude, latitude: latitude, imageURL: imageURL };
+			const tempID = "t_" + posts[posts.length - 1]?.id || "t_";
+			const data = { title: 'New Test Post', content: textboxContent, longitude: longitude, latitude: latitude, imageURL: imageURL };
+			const newPost = { id: tempID, title: data.title, content: data.content, longitude: longitude, latitude: latitude, imageURL: imageURL };
+			setPosts(prevPosts => ([...prevPosts, newPost]));
+
 			const response = await axios.post('/api/marker', JSON.stringify(data), {
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			});
-			const returnedValue = await response.data;
+			const newPostID = await response.data
+
+			// setPosts(prevPosts => {
+			// 	console.log("prev post->", prevPosts)
+			// 	const updatedPosts = prevPosts.map(
+			// 		post => post.id === tempID ? { ...post, id: newPostID } : post
+			// 	);
+			// 	return updatedPosts;
+			// });
 			handleFetch();
+
+			// e.preventDefault();
+			// const data = { longitude: longitude, latitude: latitude, imageURL: imageURL };
+			// const response2 = await axios.post('/api/marker', JSON.stringify(data), {
+			// 	headers: {
+			// 		'Content-Type': 'application/json'
+			// 	}
+			// });
+			// const returnedValue = await response.data;
+			// handleFetch();
 
 		} catch (error) {
 			console.error(error);
@@ -45,7 +68,6 @@ function Map() {
 	}
 
 	useEffect(() => {
-		console.log("Locations are fetching");
 		handleFetch()
 	}, [])
 
@@ -78,15 +100,6 @@ function Map() {
 							handleGetCoordinate(event.latLng);
 						}}
 					>
-
-						<Marker
-							position={{ lat: 43.6532, lng: -79.3832 }}
-							icon={{
-								url: "https://picsum.photos/200/300",
-								scaledSize: { width: 50, height: 50 },
-
-							}}
-						/>
 						{userMark.latitude && userMark.longitude && (
 							<Marker
 								position={{ lat: userMark.latitude, lng: userMark.longitude }}
@@ -94,23 +107,20 @@ function Map() {
 									url: "/location_on.svg",
 									scaledSize: { width: 35, height: 35 },
 								}}
-								onClick={() => {
-									router.push(`/posts/${markers.id}`)
-								}}
 							/>
 						)}
 
 						{markers.map(marker => (
-								<Marker key={marker.id}
-									position={{ lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude) }}
-									icon={{
-										url: marker.imageURL,
-										scaledSize: { width: 50, height: 50 },
-									}}
-									onClick={() => {
-										router.push(`/posts/${marker.id}`)
-									}}
-								/>
+							<Marker key={marker.id}
+								position={{ lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude) }}
+								icon={{
+									url: marker.imageURL,
+									scaledSize: { width: 50, height: 50 },
+								}}
+								onClick={() => {
+									router.push(`/posts/${marker.id}`)
+								}}
+							/>
 						))}
 					</GoogleMap>
 				</span>

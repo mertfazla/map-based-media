@@ -28,6 +28,7 @@ function PostPage({ id }) {
 					</div>
 					<div>
 						<p>Post ID: {id}</p>
+						<p>Content: {data.content}</p>
 						<p>Longitude: {data.longitude}</p>
 						<p>Latitude: {data.latitude}</p>
 					</div>

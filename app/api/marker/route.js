@@ -25,7 +25,7 @@ export async function POST(req) {
 				longitude: body.longitude,
 				imageURL: body.imageURL,
 				title: "image",
-				content: "image content",
+				content: body.content,
 				authorId: user.id,
 			},
 		});

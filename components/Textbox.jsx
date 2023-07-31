@@ -1,16 +1,31 @@
-"use client"
-import ReactQuill from 'react-quill';
-import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
-function Textbox({onChange }) {
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
+function Textbox({ onChange }) {
 	const handleTextChange = (value) => {
-		onChange(value); 
-	  };
+		onChange(value);
+	};
+
 	return (
-		<div>
-			<ReactQuill theme="snow" onChange={handleTextChange} />
+		<div className="w-full">
+			<ReactQuill
+				theme="snow"
+				onChange={handleTextChange}
+				modules={{
+					toolbar: [
+						[{ header: [1, 2, false] }],
+						['bold', 'italic', 'underline', 'strike', 'blockquote'],
+						[{ list: 'ordered' }, { list: 'bullet' }],
+						['link', 'image'],
+						['clean'],
+					],
+				}}
+			/>
 		</div>
-	)
+	);
 }
 
-export default Textbox
+export default Textbox;
+
