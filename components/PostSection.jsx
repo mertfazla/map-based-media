@@ -6,7 +6,6 @@ function PostSection({ posts, loading, handleDelete}) {
 const [postList, setPostList] = useState([]);
 
 useEffect(() => {
-	console.log("evet degisti")
 	setPostList(posts);
 }, [posts]);
 

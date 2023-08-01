@@ -1,10 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import Textbox from "@/components/Textbox";
+import { UploadButton } from './utils/uploadthings';
 
 function MapLocationAdd({ longitude, latitude, handleSubmit }) {
 	const [textboxContent, setTextboxContent] = useState("");
-	const [imageURL, setImageURL] = useState("");
+	const [imageURL, setImageURL] = useState(null);
 
 	useEffect(() => {
 	}, [longitude, latitude])
@@ -25,6 +26,18 @@ function MapLocationAdd({ longitude, latitude, handleSubmit }) {
 					</button>
 				</div>
 			</div>
+			<UploadButton
+				endpoint="imageUploader"
+				onClientUploadComplete={async(res) => {
+					const [fileKey] = await res;
+					const fileURL = `https://uploadthing.com/f/${fileKey.fileKey}`;
+					setImageURL(fileURL)
+					console.log("Upload complete! ", fileURL);
+				}}
+				onUploadError={(error) => {
+					console.log(`ERROR! ${error.message}`);
+				}}
+			/>
 
 		</div>
 	)

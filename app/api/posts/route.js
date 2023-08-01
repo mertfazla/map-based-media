@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from "@prisma/client";
 import { cookies } from 'next/headers'
+import { utapi } from 'uploadthing/server';
 const prisma = new PrismaClient();
 
 export async function POST(req) {
@@ -26,12 +27,13 @@ export async function POST(req) {
 
 export async function DELETE(req){
 	try {
-		const { postImageID } = await req.json();
+		const { postImageID, imageURL } = await req.json();
 		const deleteLocation = await prisma.PostLocations.delete({
 			where: {
 				id: postImageID
 			}
 		});
+		await utapi.deleteFiles(imageURL);
 		const data = { success: true }
 		return NextResponse.json(data)
 	} catch (error) {

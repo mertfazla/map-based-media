@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { utapi } from "uploadthing/server";
 
 function UserPostsPage() {
 	const [userPosts, setUserPosts] = useState([]);
@@ -30,9 +31,11 @@ function UserPostsPage() {
 		}
 	}, [data]);
 
-	const handleDeleteImage = async (postImageID) => {
+
+	const handleDeleteImage = async (postImageID, imageKey) => {
 		try {
-			const res = await axios.delete("/api/posts", { data: { postImageID: postImageID } });
+			const imageURL = imageKey.replace("https://uploadthing.com/f/", "");
+			const res = await axios.delete("/api/posts", { data: { postImageID: postImageID, imageURL: imageURL } });
 			const data = await res.data;
 			setUserPosts(prevPosts => prevPosts.filter(post => post.id !== postImageID));
 		} catch (error) {
@@ -68,7 +71,7 @@ function UserPostsPage() {
 									<h2 className="text-center bg-slate-300 w-full">{post.title}</h2>
 									<p>{post.content}</p>
 									<span>
-										<button onClick={(e) => handleDeleteImage(post.id)}>Delete</button>
+										<button onClick={(e) => handleDeleteImage(post.id, post.imageURL)}>Delete</button>
 									</span>
 								</div>
 							</div>
