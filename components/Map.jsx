@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react"
 import MapLocationAdd from "./MapLocationAdd";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { MarkerClusterer } from "@react-google-maps/api";
 
 
 function Map() {
@@ -100,7 +101,28 @@ function Map() {
 							handleGetCoordinate(event.latLng);
 						}}
 					>
-						{userMark.latitude && userMark.longitude && (
+						<MarkerClusterer className="w-10 h-10 bg-red-500 rounded-full flex item-center" gridSize={60}>
+							{(clusterer) =>
+								markers.map((marker) => (
+									<Marker
+										key={marker.id}
+										position={{
+											lat: parseFloat(marker.latitude),
+											lng: parseFloat(marker.longitude),
+										}}
+										icon={{
+											url: marker.imageURL,
+											scaledSize: { width: 50, height: 50 },
+										}}
+										onClick={() => {
+											router.push(`/posts/${marker.id}`);
+										}}
+										clusterer={clusterer}
+									/>
+								))
+							}
+						</MarkerClusterer>
+						{/* {userMark.latitude && userMark.longitude && (
 							<Marker
 								position={{ lat: userMark.latitude, lng: userMark.longitude }}
 								icon={{
@@ -108,20 +130,7 @@ function Map() {
 									scaledSize: { width: 35, height: 35 },
 								}}
 							/>
-						)}
-
-						{markers.map(marker => (
-							<Marker key={marker.id}
-								position={{ lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude) }}
-								icon={{
-									url: marker.imageURL,
-									scaledSize: { width: 50, height: 50 },
-								}}
-								onClick={() => {
-									router.push(`/posts/${marker.id}`)
-								}}
-							/>
-						))}
+						)} */}
 					</GoogleMap>
 				</span>
 			</div>
