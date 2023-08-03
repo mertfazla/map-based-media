@@ -122,15 +122,15 @@ function Map() {
 								))
 							}
 						</MarkerClusterer>
-						{/* {userMark.latitude && userMark.longitude && (
-							<Marker
-								position={{ lat: userMark.latitude, lng: userMark.longitude }}
-								icon={{
-									url: "/location_on.svg",
-									scaledSize: { width: 35, height: 35 },
-								}}
-							/>
-						)} */}
+						{userMark.latitude && userMark.longitude && (
+								<Marker
+									position={{ lat: userMark.latitude, lng: userMark.longitude }}
+									icon={{
+										url: "/location_on.svg",
+										scaledSize: { width: 35, height: 35 },
+									}}
+								/>
+						)}
 					</GoogleMap>
 				</span>
 			</div>
