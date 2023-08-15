@@ -15,6 +15,8 @@ export async function GET(req, {params}) {
 			},
 		})
 		const data = await post
+		data.createdAt = data.createdAt.toLocaleString()
+
 		return NextResponse.json(data)
 	} catch (error) {
 		console.log(error)
