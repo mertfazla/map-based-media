@@ -18,6 +18,8 @@
     "dotenv": "^16.3.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
+    "flowbite": "^1.8.1",
+    "flowbite-react": "^0.5.0",
     "next": "^13.4.11-canary.0",
     "next-auth": "^4.22.1",
     "plaiceholder": "^3.0.0",

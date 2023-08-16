@@ -85,8 +85,9 @@ function Map() {
 	if (!isLoaded) return "Loading Maps";
 	return (
 		<>
-			<div className="w-full h-[30rem] relative flex justify-center my-10">
-				<span className="w-9/12 h-full relative bg-slate-500 shadow-xl border-8 border-slate-200 rounded-xl">
+			<div className="w-full h-full relative flex flex-col justify-center items-center my-10">
+				<h1 className="text-xl bg-white/90 border rounded-2xl px-5 py-4 my-2 shadow-xl">Select the location of the picture on the map</h1>
+				<span className="w-10/12 h-screen relative shadow-xl border-2 border-blue-800">
 					<GoogleMap
 						mapContainerStyle={mapContainerStyle}
 						zoom={8}
@@ -123,13 +124,13 @@ function Map() {
 							}
 						</MarkerClusterer>
 						{userMark.latitude && userMark.longitude && (
-								<Marker
-									position={{ lat: userMark.latitude, lng: userMark.longitude }}
-									icon={{
-										url: "/location_on.svg",
-										scaledSize: { width: 35, height: 35 },
-									}}
-								/>
+							<Marker
+								position={{ lat: userMark.latitude, lng: userMark.longitude }}
+								icon={{
+									url: "/location_on.svg",
+									scaledSize: { width: 35, height: 35 },
+								}}
+							/>
 						)}
 					</GoogleMap>
 				</span>

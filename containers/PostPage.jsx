@@ -26,7 +26,7 @@ function PostPage({ id }) {
 			{!loading && (
 				<>
 					<div className="flex flex-col w-full h-full relative">
-						<div className="flex flex-col justify-center items-center bg-cyan-100 shadow-xl">
+						<div className="flex flex-col justify-center items-center bg-cyan-100 shadow-xl mb-4">
 							<CustomImage imageURL={data.imageURL} alt={data.title} />
 						</div>
 						<div className="h-full p-2">
