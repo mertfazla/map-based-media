@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import CustomImage from "@/components/CustomImage";
+import CustomImage from "@/components/PostPage/CustomImage";
 
 function PostPage({ id }) {
 	const [data, setData] = useState({});

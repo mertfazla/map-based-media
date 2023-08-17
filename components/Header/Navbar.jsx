@@ -106,7 +106,7 @@ const Navbar = () => {
 				>
 					<ul className="flex w-full flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
 						<li className='block m-auto'>
-							<Link href='/map' className='text-md p-4 bg-cyan-200 rounded-3xl hover:bg-cyan-100 border-slate-500  shadow-xl transition'>
+							<Link href='/share' className='text-md p-4 bg-cyan-200 rounded-3xl hover:bg-cyan-100 border-slate-500  shadow-xl transition'>
 								Share Image
 							</Link>
 						</li>

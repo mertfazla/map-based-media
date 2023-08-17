@@ -2,7 +2,7 @@
 require('dotenv').config()
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
 import { useEffect, useState, useRef } from "react"
-import MapLocationAdd from "./MapLocationAdd";
+import MapLocationAdd from "@/components/SharePage/MapLocationAdd"
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { MarkerClusterer } from "@react-google-maps/api";
@@ -43,25 +43,7 @@ function Map() {
 				}
 			});
 			const newPostID = await response.data
-
-			// setPosts(prevPosts => {
-			// 	console.log("prev post->", prevPosts)
-			// 	const updatedPosts = prevPosts.map(
-			// 		post => post.id === tempID ? { ...post, id: newPostID } : post
-			// 	);
-			// 	return updatedPosts;
-			// });
 			handleFetch();
-
-			// e.preventDefault();
-			// const data = { longitude: longitude, latitude: latitude, imageURL: imageURL };
-			// const response2 = await axios.post('/api/marker', JSON.stringify(data), {
-			// 	headers: {
-			// 		'Content-Type': 'application/json'
-			// 	}
-			// });
-			// const returnedValue = await response.data;
-			// handleFetch();
 
 		} catch (error) {
 			console.error(error);
@@ -78,7 +60,6 @@ function Map() {
 		height: "100%",
 	};
 	const { isLoaded, loadError } = useLoadScript({
-		//googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
 		googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
 	});
 	if (loadError) return "Error loading maps";

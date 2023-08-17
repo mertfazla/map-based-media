@@ -1,7 +1,7 @@
 "use client"
 import "@uploadthing/react/styles.css";
 import React, { useEffect, useState } from 'react';
-import Textbox from "@/components/Textbox";
+import Textbox from "@/components/Textbox/Textbox";
 import { UploadButton } from "@uploadthing/react";
 import NextImage from "next/image";
 

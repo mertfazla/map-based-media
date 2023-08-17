@@ -1,7 +1,7 @@
 import './globals.css'
-import ProviderContext from "@/components/ProviderContext"
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import ProviderContext from "@/Context/ProviderContext"
+import Navbar from '@/components/Header/Navbar'
+import Footer from '@/components/Footer/Footer'
 
 export const metadata = {
 	title: 'Create Next App',

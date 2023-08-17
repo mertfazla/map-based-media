@@ -1,4 +1,4 @@
-import UserPostsPage from "@/containers/UserPostsPage"
+import UserPostsPage from "@/components/UserPostsPage/UserPostsPage"
 
 function UserData() {
   return (

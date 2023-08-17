@@ -1,16 +1,13 @@
 "use client"
-require('dotenv').config()
+
+import { MarkerClusterer } from "@react-google-maps/api";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
 import { useEffect, useState, useRef } from "react"
-import MapLocationAdd from "./MapLocationAdd";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { MarkerClusterer } from "@react-google-maps/api";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-
-function ViewMap() {
+export default function ViewMap() {
 	const { data, status } = useSession({
 		required: true,
 		onUnauthenticated() {
@@ -85,5 +82,3 @@ function ViewMap() {
 		</>
 	)
 }
-
-export default ViewMap
