@@ -21,6 +21,9 @@ module.exports = {
 					'100%': { opacity: '1', transform: 'translateY(0)' },
 				},
 			},
+			backgroundImage: {
+				'homepage-bg': "url('/homepage-bg.jpg')",
+			  }
 		},
 	},
 	plugins: [
