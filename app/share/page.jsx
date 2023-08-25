@@ -1,8 +1,8 @@
-import Map from "@/components/SharePage/Map"
+import ShareSection from "@/components/SharePage/ShareSection"
 
 function page() {
 	return (
-		<Map />
+		<ShareSection />
 	)
 }
 

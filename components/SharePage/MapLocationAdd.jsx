@@ -5,12 +5,10 @@ import Textbox from "@/components/Textbox/Textbox";
 import { UploadButton } from "@uploadthing/react";
 import NextImage from "next/image";
 
-function MapLocationAdd({ longitude, latitude, handleSubmit }) {
+function MapLocationAdd({ handleSubmit }) {
 	const [textboxContent, setTextboxContent] = useState("");
 	const [imageURL, setImageURL] = useState(null);
 
-	useEffect(() => {
-	}, [longitude, latitude])
 	return (
 		<div className='w-full flex flex-col items-center justify-center'>
 			<div className="w-full bg-slate-50/20 pt-5 pb-10 ">
