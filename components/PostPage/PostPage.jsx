@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import CustomImage from "@/components/PostPage/CustomImage";
+import Spinner from "../Loading/Spinner";
 
 function PostPage({ id }) {
 	const [data, setData] = useState({});
@@ -22,7 +23,12 @@ function PostPage({ id }) {
 	}, [])
 	return (
 		<>
-			
+			{loading &&
+				<div className="flex flex-col w-full h-screen relative justify-center items-center -translate-y-10 ">
+					<Spinner width={150} height={150} />
+				</div>
+			}
+
 			{!loading && (
 				<>
 					<div className="flex flex-col w-full h-full relative">
